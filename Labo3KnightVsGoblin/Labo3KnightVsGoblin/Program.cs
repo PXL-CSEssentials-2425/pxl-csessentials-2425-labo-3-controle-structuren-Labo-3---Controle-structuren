@@ -1,4 +1,93 @@
-﻿/* 
+﻿Console.WriteLine("Welcome to Knight vs Goblin!");
+Console.WriteLine("----------------------------");
+Console.WriteLine("Enter knight Health");
+string input = Console.ReadLine();
+
+Random randomNumberGenerator = new Random();
+ 
+int knightHealth;
+if (int.TryParse(input, out knightHealth))
+{
+    if (knightHealth <= 0 || knightHealth > 100)
+    {
+        Console.WriteLine("Invalid number, default value 100 is used.");
+        knightHealth = 100;
+    }
+}
+else
+{
+    Console.WriteLine("Invalid number, default value 100 is used.");
+    knightHealth = 100;
+}
+
+int goblinHealth = randomNumberGenerator.Next(1, 101);
+
+Console.WriteLine("Goblin health: " + goblinHealth);
+Console.WriteLine("Knight health: " + knightHealth);
+
+//for (int attempts = 1; attempts <= 4; attempts++)
+do
+{
+    //Console.WriteLine($"Ronde {attempts}");
+    int AttackKnight = 10;
+    int AttackGoblin = 5;
+    int HealKnight = 10;
+    int HealGoblin = 5;
+
+    Console.WriteLine("Choose your action");
+    Console.WriteLine("1. Attack");
+    Console.WriteLine("2. Heal");
+    string selectedAction = Console.ReadLine();
+
+    switch (selectedAction)
+    {
+        case "1":
+            goblinHealth -= AttackKnight;
+            Console.WriteLine($"You attacked the goblin for {AttackKnight} damage");
+            break;
+        case "2":
+            knightHealth += HealKnight;
+            Console.WriteLine($"You healed the knight with {HealKnight} points.");
+            break;
+        default:
+            Console.WriteLine("Invalid input, choose a right option.");
+            break;
+
+    }
+
+    if (goblinHealth > 0)
+    {
+        knightHealth -= AttackGoblin;
+        Console.WriteLine($"You were attacked by the goblin for {AttackGoblin} damage");
+    }
+
+
+    if (knightHealth <= 0)
+    {
+        Console.WriteLine("You died!");
+    }
+    else
+    {
+        Console.WriteLine("Knight health: " + knightHealth); //Console.Writeline($"Knight health: {knightHealth}");
+    }
+
+    if (goblinHealth <= 0)
+    {
+        Console.WriteLine("The goblin has died!");
+    }
+    else
+    {
+        Console.WriteLine("Goblin health: " + goblinHealth); //Console.Writeline($"Goblin health: {goblinHealth}");
+    }
+} while (knightHealth > 0 && goblinHealth > 0);
+
+
+
+
+
+
+
+/* 
  * Deel 1
  * 
  * We gaan een applicatie maken waarin de speler als ridder tegen een goblin moet vechten.
@@ -26,7 +115,7 @@
 /*
  * Deel 3
  * 
- * Declareer en initialiseer een aanvalswaarde voor de ridder, attackKnight (10), 
+ * Declareer en initialiseer een aanvalswaarde voor de ridder, attackKnight  (10), 
  * en de goblin, attackGoblin (5).
  * Laat de speler een actie selecteren door een getal in te geven. Gebruik een switch:
  *  - Als ik als speler actie 1 kies, dan val ik aan en wordt attackKnight afgetrokken van 
